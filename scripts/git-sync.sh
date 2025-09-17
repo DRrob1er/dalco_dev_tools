@@ -1,5 +1,8 @@
 #!/bin/bash
-# Interactive helper to sync Dalco repos with numbered menu
+# Interactive helper to sync Dalco repos (core, apps, dev_tools)
+
+# Base path = parent of scripts folder
+BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 REPOS=("dalco_core" "dalco_applications" "dalco_dev_tools")
 
@@ -47,10 +50,16 @@ fi
 
 # Loop through repos
 for repo in "${SELECTED_REPOS[@]}"; do
-  if [ -d "$repo/.git" ]; then
+  if [ "$repo" = "dalco_dev_tools" ]; then
+    REPO_PATH="$BASE_DIR"
+  else
+    REPO_PATH="$BASE_DIR/../$repo"
+  fi
+
+  if [ -d "$REPO_PATH/.git" ]; then
     echo ""
     echo ">>> Working on $repo ($ACTION)"
-    cd "$repo" || exit
+    cd "$REPO_PATH" || exit
     case $ACTION in
       pull)
         git pull
@@ -64,8 +73,8 @@ for repo in "${SELECTED_REPOS[@]}"; do
         git status -s
         ;;
     esac
-    cd ..
+    cd - >/dev/null || exit
   else
-    echo "Skipping $repo (not a git repo)"
+    echo "Skipping $repo (not a git repo at $REPO_PATH)"
   fi
 done

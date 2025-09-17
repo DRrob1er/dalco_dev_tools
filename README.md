@@ -15,11 +15,19 @@ dalco_dev_tools/
     worlds/                # Stage world definitions (.world)
     robots/                # robot model definitions (.inc)
     scripts/               # helper scripts, image conversion
+    maps/                  # maps used in AMCL
   Stage/                   # external Stage simulator (cloned)
   stage_ros2/              # ROS 2 wrapper for Stage (cloned)
 ```
 
 ### Setup
+Clone submodules:
+
+```bash
+cd ~/dalco_ws/src/dalco_dev_tools
+git clone https://github.com/tuw-robotics/Stage.git
+git clone https://github.com/tuw-robotics/stage_ros2.git
+```
 
 Install dependencies:
 
