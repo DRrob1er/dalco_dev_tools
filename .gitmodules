@@ -1,0 +1,6 @@
+[submodule "simulation/stage_ros2"]
+	path = simulation/stage_ros2
+	url = https://github.com/tuw-robotics/stage_ros2.git
+[submodule "simulation/Stage"]
+	path = simulation/Stage
+	url = https://github.com/tuw-robotics/stage_ros2.git
